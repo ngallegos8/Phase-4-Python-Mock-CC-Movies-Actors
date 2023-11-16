@@ -47,16 +47,9 @@ You will implement an API for the following data model:
 
 ![Schema](./Schema.png)
 
+The file `server/models.py` defines the model classes **without relationships or fields**.
 
-The file `server/models.py` defines the model classes **without relationships**.
-Use the following commands to create the initial database `app.db`:
-
-```console
-cd server/
-export FLASK_APP=app.py
-flask db init
-flask db upgrade head
-```
+Create the fields based off the above schema.
 
 Now you can implement the relationships as shown in the ER Diagram:
 
@@ -68,13 +61,21 @@ Update `server/models.py` to establish the model relationships. Since a
 `Credit` belongs to a `Actor` and a `Movie`, configure the model to
 cascade deletes.
 
-Set serialization rules to limit the recursion depth.
-
-Run the migrations and seed the database:
+After creating the relationships, we intialize our DB, create our migration, upgrade our database with our migration:
 
 ```console
-flask db revision --autogenerate -m 'message'
-flask db upgrade head
+cd server/
+export FLASK_APP=app.py
+flask db init
+flask db migrate
+flask db upgrade
+```
+
+Set serialization rules to limit the recursion depth.
+
+Seed the database:
+
+```console
 python seed.py
 ```
 
