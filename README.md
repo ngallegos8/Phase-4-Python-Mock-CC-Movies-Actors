@@ -131,8 +131,7 @@ instantiate the `Api` class in server/app.py.
 
 ### GET /actors
 
-Return JSON data in the format below. **Note**: you should return a JSON
-response in this format, without any additional nested data related to each
+Return JSON data, without any additional nested data related to each
 actor.
 
 <!-- ```json
@@ -152,7 +151,7 @@ actor.
 
 ### GET /actors/<int:id>
 
-If the `Actor` exists, return JSON data in the format below. Make sure to include a list of Movies for the actor.
+If the `Actor` exists, return JSON data. Make sure to include a list of Movies for the actor.
 <!-- 
 ```json
 "field_of_study": "Orbits",
@@ -288,9 +287,7 @@ the appropriate HTTP status code:
 
 ### GET /movies
 
-Return JSON data in the format below. **Note**: you should return a JSON
-response in this format, without any additional nested data related to each
-movie.
+Return JSON data without any additional nested data related to each movie.
 
 <!-- ```json
 [
@@ -350,6 +347,160 @@ If the `Movie` is **not** created successfully, return the following JSON data, 
 ```json
 {
   "errors": ["validation errors"]
+}
+```
+
+
+### GET /credits
+
+Return JSON data without any additional nested data related to each
+credit.
+
+<!-- ```json
+[
+  {
+    "id": 1,
+    "name": "Mel T. Valent",
+    "field_of_study": "xenobiology"
+  },
+  {
+    "id": 2,
+    "name": "P. Legrange",
+    "field_of_study": "orbital mechanics"
+  }
+]
+``` -->
+
+### GET /credits/<int:id>
+
+If the `Credit` exists, Make sure to include the actor and movie associated.
+<!-- 
+```json
+"field_of_study": "Orbits",
+    "id": 1,
+    "name": "Joseph Richard",
+    "missions": [
+        {
+            "id": 1,
+            "name": "Explore Planet X.",
+            "planet": {
+                "distance_from_earth": 302613474,
+                "id": 8,
+                "name": "X",
+                "nearest_star": "Shiny Star"
+            },
+            "planet_id": 8,
+            "scientist_id": 1
+        },
+        {
+            "id": 10,
+            "name": "Explore Planet Y.",
+            "planet": {
+                "distance_from_earth": 1735242898,
+                "id": 14,
+                "name": "Y",
+                "nearest_star": "Dim Star"
+            },
+            "planet_id": 14,
+            "scientist_id": 1
+        }
+    ]
+}
+``` -->
+
+If the `Credit` does not exist, return the following JSON data, along with
+the appropriate HTTP status code:
+
+```json
+{
+  "error": "Credit not found"
+}
+```
+
+### POST /credits
+
+This route should create a new `Credit`. It should accept an object with the
+following properties in the body of the request:
+
+```json
+{
+  "actor_id": 2,
+  "movie_id": 1,
+  "role": "Performer"
+}
+```
+
+If the `Credit` is created successfully, send back a response with the new `Credit`.
+
+<!-- ```json
+{
+  "id": 3,
+  "name": "Evan Horizon",
+  "field_of_study": "astronavigation"
+}
+``` -->
+
+If the `Credit` is **not** created successfully due to validation errors,
+return the following JSON data, along with the appropriate HTTP status code:
+
+```json
+{
+  "errors": ["validation errors"]
+}
+```
+
+### PATCH /credit/:id
+
+This route should update an existing `Credit`. It should accept an object
+with one or more of the following properties in the body of the request:
+
+```json
+{
+  "role": "Director",
+}
+```
+
+If the `Actor` is updated successfully, send back a response with the updated `Actor` and a 202 `accepted` status code.
+<!-- 
+```json
+{
+  "id": 2,
+  "name": "Bevan Horizon",
+  "field_of_study": "warp drive tech"
+}
+``` -->
+
+If the `Credit` is **not** updated successfully, return the following JSON
+data, along with the appropriate HTTP status code:
+
+```json
+{
+  "errors": ["validation errors"]
+}
+```
+
+OR, given an invalid ID, the appropriate HTTP status code, and the following
+JSON:
+
+```json
+{
+  "error": "Credit not found"
+}
+```
+
+### DELETE /credits/<int:id>
+
+If the `Credit` exists, it should be removed from the database.
+
+After deleting the `Credit`, return an _empty_ response body, along with the
+appropriate HTTP status code.
+
+If the `Credit` does not exist, return the following JSON data, along with
+the appropriate HTTP status code:
+
+```json
+{
+  "error": "Credit not found"
 }
 ```
 
