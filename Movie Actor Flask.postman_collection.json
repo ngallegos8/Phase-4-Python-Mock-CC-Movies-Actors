@@ -10,7 +10,37 @@
 			"name": "Actor",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5555/actors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Credit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5555/credits",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"credits"
+					]
+				}
 			},
 			"response": []
 		},
@@ -18,7 +48,39 @@
 			"name": "ActorbyID",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5555/actor/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"actor",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreditbyID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5555/credits/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"credits",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -29,7 +91,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\n    \"name\": \"Danny\",\n    \"age\": 25\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -51,12 +113,40 @@
 			"response": []
 		},
 		{
+			"name": "Credit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role\": \"Performer\",\n    \"actor_id\": 1,\n    \"movie_id\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5555/credit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"credit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "ActorbyID",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5555/actor/26",
+					"raw": "http://localhost:5555/actor/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -64,7 +154,27 @@
 					"port": "5555",
 					"path": [
 						"actor",
-						"26"
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreditbyID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5555/credit/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"credit",
+						"2"
 					]
 				}
 			},
@@ -74,7 +184,57 @@
 			"name": "ActorbyID",
 			"request": {
 				"method": "PATCH",
-				"header": []
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Daniel\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5555/actors/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"actors",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreditbyID",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role\": \"Director\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5555/credits/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"credits",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -82,7 +242,18 @@
 			"name": "Movie",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5555/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"movies"
+					]
+				}
 			},
 			"response": []
 		},
@@ -91,6 +262,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rating\": 10,\n    \"image\": \"https://m.media-amazon.com/images/M/MV5BMjA2NjU5MTg5OF5BMl5BanBnXkFtZTgwOTkyMzQxMDE@._V1_FMjpg_UX1000_.jpg\",\n    \"genre\": \"Horror\",\n    \"description\": \"Scary Movie\",\n    \"title\": \"Scream\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "http://localhost:5555/movie",
 					"protocol": "http",
