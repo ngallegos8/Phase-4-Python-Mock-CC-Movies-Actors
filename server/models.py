@@ -33,6 +33,22 @@ class Movie(db.Model, SerializerMixin):
     # Add serialization rules
     serialize_rules = ('-credit_table.movie', )
 
+    #Add validation
+    @validates('rating')
+    def validate_rating(self, key, value):
+        if 1 < value < 10:
+            return value
+        else:
+            raise ValueError("Rating must be between 1 and 10")
+    
+    @validates('genre')
+    def validate_genre(self, key, value):
+        genres = [ "Action", "Comedy", "Drama", "Horror", "Romance", "Thriller", "Science Fiction", "Fantasy", "Mystery", "Adventure", "Crime", "Family", "Animation", "Documentary", "War" ]
+        if value in genres:
+            return value
+        else:
+            raise ValueError("Not a valid genre")
+
 
 
 class Actor(db.Model, SerializerMixin):
@@ -50,10 +66,11 @@ class Actor(db.Model, SerializerMixin):
 
     # Add validation
     @validates('name')
-    def validate_name(self, key, name):
-        if not name or len(name) < 1:
-            raise ValueError("Scientist must have a name")
-        return name
+    def validate_name(self, key, value):
+        if value:
+            return value
+        raise ValueError("Not valid name")
+    
     @validates('age')
     def validate_age(self, key, value):
         if 10 < value:
@@ -86,3 +103,15 @@ class Credit(db.Model, SerializerMixin):
             return value
         else:
             raise ValueError("Not a valid role")
+        
+    @validates('actor_id')
+    def validate_actor(self, key, value):
+        if value:
+            return value
+        raise ValueError('Credit must have actor ID.')
+    
+    @validates('movie_id')
+    def validate_movie(self, key, value):
+        if value:
+            return value
+        raise ValueError('Credit must have movie ID.')
